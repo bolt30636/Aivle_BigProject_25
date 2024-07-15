@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .form-container {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h1>Signup</h1>
+        <div class="form-group">
+            <label for="signup-userID">User ID:</label>
+            <input type="text" id="signup-userID">
+        </div>
+        <div class="form-group">
+            <label for="signup-name">Name:</label>
+            <input type="text" id="signup-name">
+        </div>
+        <div class="form-group">
+            <label for="signup-email">Email:</label>
+            <input type="email" id="signup-email">
+        </div>
+        <div class="form-group">
+            <label for="signup-phoneNum">Phone Number:</label>
+            <input type="text" id="signup-phoneNum">
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password">
+        </div>
+        <div class="form-group">
+            <label for="signup-userType">User Type:</label>
+            <input type="text" id="signup-userType">
+        </div>
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LfLHBAqAAAAAEtE5Ps3PqiRuTYDizZQDdCriHW2"></div>  <!-- Site Key 사용 -->
+        </div>
+        <div class="form-group">
+            <button onclick="signup()">Signup</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h1>Login</h1>
+        <div class="form-group">
+            <label for="login-userID">User ID:</label>
+            <input type="text" id="login-userID">
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password">
+        </div>
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LfLHBAqAAAAAEtE5Ps3PqiRuTYDizZQDdCriHW2"></div>  <!-- Site Key 사용 -->
+        </div>
+        <div class="form-group">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        <h1>Social Login</h1>
+        <div class="form-group">
+            <label for="social-provider">Provider:</label>
+            <select id="social-provider">
+                <option value="kakao">Kakao</option>
+                <option value="google">Google</option>
+                <option value="naver">Naver</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="social-token">Token:</label>
+            <input type="text" id="social-token">
+        </div>
+        <div class="form-group">
+            <button onclick="socialLogin()">Social Login</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h1>Token Info</h1>
+        <div class="form-group">
+            <button onclick="getNameFromToken()">Get Name from Token</button>
+        </div>
+        <div class="form-group">
+            <button onclick="getEmailFromToken()">Get Email from Token</button>
+        </div>
+        <div class="form-group">
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+</div>
+
+<div id="result"></div>
+
+<script>
+    const API_URL = 'http://localhost:8080/auth';
+
+    async function signup() {
+        const userID = document.getElementById('signup-userID').value;
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const phoneNum = document.getElementById('signup-phoneNum').value;
+        const password = document.getElementById('signup-password').value;
+        const userType = document.getElementById('signup-userType').value;
+        const captchaResponse = grecaptcha.getResponse();  // 캡챠 응답 가져오기
+
+        const response = await fetch(`${API_URL}/signup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ userID, name, email, phoneNum, password, userType, captchaResponse })
+        });
+
+        if (response.ok) {
+            document.getElementById('result').innerText = 'Signup Success';
+        } else {
+            document.getElementById('result').innerText = 'Signup Failed: ' + await response.text();
+        }
+    }
+
+    async function login() {
+        const userID = document.getElementById('login-userID').value;
+        const password = document.getElementById('login-password').value;
+        const captchaResponse = grecaptcha.getResponse();  // 캡챠 응답 가져오기
+
+        const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ userID, password, captchaResponse })
+        });
+
+        if (response.ok) {  // 응답이 성공적일 때 (HTTP 상태 코드 200-299)
+            document.getElementById('result').innerText = 'Login Success';
+        } else {
+            document.getElementById('result').innerText = 'Login Failed: ' + await response.text();
+        }
+    }
+
+    async function socialLogin() {
+        const provider = document.getElementById('social-provider').value;
+        const token = document.getElementById('social-token').value;
+
+        const response = await fetch(`${API_URL}/social-login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ provider, token })
+        });
+
+        if (response.ok) {
+            document.getElementById('result').innerText = 'Social Login Success';
+        } else {
+            document.getElementById('result').innerText = 'Social Login Failed: ' + await response.text();
+        }
+    }
+
+    async function getNameFromToken() {
+        const response = await fetch(`${API_URL}/token/name`);
+        const result = await response.text();
+        document.getElementById('result').innerText = result;
+    }
+
+    async function getEmailFromToken() {
+        const response = await fetch(`${API_URL}/token/email`);
+        const result = await response.text();
+        document.getElementById('result').innerText = result;
+    }
+
+    async function logout() {
+        const response = await fetch(`${API_URL}/logout`);
+        const result = await response.text();
+        document.getElementById('result').innerText = result;
+    }
+</script>
+</body>
+</html>
