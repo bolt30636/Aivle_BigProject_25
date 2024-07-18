@@ -38,8 +38,8 @@ public class User {
     @Column(name = "login_attempts", nullable = false)
     private int loginAttempts = 0;
 
-//    private String verificationToken;
-//    private boolean emailVerified;
+    @Column(name = "email_verified", nullable = false)
+    private boolean emailVerified = false;
 
     // 기본 생성자
     public User() {}
@@ -54,6 +54,7 @@ public class User {
         this.userType = userType;
         this.loginAttempts = 0;
         this.isAccountLocked = false;
+        this.emailVerified = false;
     }
 
     // getter 및 setter 메서드
@@ -137,22 +138,13 @@ public class User {
         this.loginAttempts = loginAttempts;
     }
 
-//
-//    public String getVerificationToken() {
-//        return verificationToken;
-//    }
-//
-//    public void setVerificationToken(String verificationToken) {
-//        this.verificationToken = verificationToken;
-//    }
-//
-//    public boolean isEmailVerified() {
-//        return emailVerified;
-//    }
-//
-//    public void setEmailVerified(boolean emailVerified) {
-//        this.emailVerified = emailVerified;
-//    }
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
 
     @Override
     public String toString() {
@@ -167,6 +159,7 @@ public class User {
                 ", passwordChangedAt=" + passwordChangedAt +
                 ", isAccountLocked=" + isAccountLocked +
                 ", loginAttempts=" + loginAttempts +
+                ", emailVerified=" + emailVerified +
                 '}';
     }
 }

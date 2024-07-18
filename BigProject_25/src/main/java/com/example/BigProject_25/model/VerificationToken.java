@@ -4,24 +4,26 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "verification_tokens")
 public class VerificationToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "token", nullable = false, unique = true)
     private String token;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    @Column(name = "expiry_date", nullable = false)
     private Date expiryDate;
 
-    // 기본 생성자
-    public VerificationToken() {}
+    public VerificationToken() {
+    }
 
-    // 생성자
     public VerificationToken(String token, User user, Date expiryDate) {
         this.token = token;
         this.user = user;
