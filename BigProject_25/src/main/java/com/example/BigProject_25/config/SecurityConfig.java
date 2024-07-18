@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/auth/**", "/user-management.html", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()  // 이 경로들에 대한 접근 허용
+                .antMatchers("/auth/**", "/user-management.html", "/static/**", "/css/**", "/js/**", "/images/**","/lost-items/**","/api/**").permitAll()  // 이 경로들에 대한 접근 허용
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
