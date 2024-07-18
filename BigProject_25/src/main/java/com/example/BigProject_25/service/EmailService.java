@@ -12,9 +12,9 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     public void sendVerificationEmail(String recipientAddress, String token) {
-        String subject = "Registration Confirmation";
+        String subject = "[AIrport] 이메일 인증을 진행해주세요.";
         String confirmationUrl = "http://localhost:8080/auth/confirm?token=" + token;
-        String message = "Please confirm your registration by clicking the link below";
+        String message = "아래의 링크를 클릭해 이메일을 인증하고 회원가입 과정을 완료합니다.";
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);

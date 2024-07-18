@@ -1,6 +1,7 @@
 package com.example.BigProject_25.service;
 
 import com.example.BigProject_25.model.User;
+import com.example.BigProject_25.model.VerificationToken;
 import com.example.BigProject_25.repository.UserRepository;
 import com.example.BigProject_25.repository.VerificationTokenRepository;
 import io.jsonwebtoken.Claims;
@@ -19,6 +20,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +34,9 @@ public class AuthService {
 
     @Autowired
     private VerificationTokenRepository tokenRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -331,9 +336,8 @@ public class AuthService {
         user.setUserType("user");
 
         userRepository.save(user);
-//
-//        String verificationToken = generateVerificationToken(user);
-//        sendVerificationEmail(user, verificationToken);
+        String verificationToken = generateVerificationToken(user);
+        emailService.sendVerificationEmail(user.getEmail(), verificationToken);
         return true;
     }
 
@@ -344,37 +348,25 @@ public class AuthService {
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
-//
-//    public String generateVerificationToken(User user) {
-//        String token = UUID.randomUUID().toString();
-//        VerificationToken verificationToken = new VerificationToken(token, user, new Date(System.currentTimeMillis() + 86400000)); // 1일 만료
-//        tokenRepository.save(verificationToken);
-//        return token;
-//    }
-//
-//    public void sendVerificationEmail(User user, String token) {
-//        String recipientAddress = user.getEmail();
-//        String subject = "Registration Confirmation";
-//        String confirmationUrl = "http://localhost:8080/auth/confirm?token=" + token;
-//        String message = "Please confirm your registration by clicking the link below";
-//
-//        SimpleMailMessage email = new SimpleMailMessage();
-//        email.setTo(recipientAddress);
-//        email.setSubject(subject);
-//        email.setText(message + "\r\n" + confirmationUrl);
-//        mailSender.send(email);
-//    }
 
-//    public boolean verifyEmail(String token) {
-//        VerificationToken verificationToken = tokenRepository.findByToken(token);
-//        if (verificationToken == null || verificationToken.getExpiryDate().before(new Date())) {
-//            return false;
-//        }
-//        User user = verificationToken.getUser();
-//        userRepository.save(user);
-//        tokenRepository.delete(verificationToken); // 인증이 완료된 토큰 삭제
-//        return true;
-//    }
+    public String generateVerificationToken(User user) {
+        String token = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken(token, user, new Date(System.currentTimeMillis() + 300000)); // 5분 만료
+        tokenRepository.save(verificationToken);
+        return token;
+    }
+
+    public boolean verifyEmail(String token) {
+        VerificationToken verificationToken = tokenRepository.findByToken(token);
+        if (verificationToken == null || verificationToken.getExpiryDate().before(new Date())) {
+            return false;
+        }
+        User user = verificationToken.getUser();
+        user.setEmailVerified(true);
+        userRepository.save(user);
+        tokenRepository.delete(verificationToken); // 인증이 완료된 토큰 삭제
+        return true;
+    }
 
     public String getNameFromToken() {
         if (this.token == null) {
