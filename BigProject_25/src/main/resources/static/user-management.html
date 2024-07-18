@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .form-container {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .social-login-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .social-login-button {
+            flex: 1;
+            margin: 5px;
+            padding: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .kakao {
+            background-color: #FEE500;
+            color: #3D1D1C;
+        }
+        .google {
+            background-color: #DB4437;
+        }
+        .naver {
+            background-color: #1EC800;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h1>Signup</h1>
+        <div class="form-group">
+            <label for="signup-userID">User ID:</label>
+            <input type="text" id="signup-userID">
+        </div>
+        <div class="form-group">
+            <label for="signup-name">Name:</label>
+            <input type="text" id="signup-name">
+        </div>
+        <div class="form-group">
+            <label for="signup-email">Email:</label>
+            <input type="email" id="signup-email">
+            <button onclick="sendVerificationEmail()">Verify Email</button>
+        </div>
+        <div class="form-group">
+            <label for="signup-phoneNum">Phone Number:</label>
+            <input type="text" id="signup-phoneNum">
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password">
+        </div>
+        <div class="form-group">
+            <label for="signup-password-confirm">Confirm Password:</label>
+            <input type="password" id="signup-password-confirm">
+        </div>
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LfLHBAqAAAAAEtE5Ps3PqiRuTYDizZQDdCriHW2"></div>
+        </div>
+        <div class="form-group">
+            <button onclick="signup()">Signup</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h1>Login</h1>
+        <div class="form-group">
+            <label for="login-userID">User ID:</label>
+            <input type="text" id="login-userID">
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password">
+        </div>
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LfLHBAqAAAAAEtE5Ps3PqiRuTYDizZQDdCriHW2"></div>
+        </div>
+        <div class="form-group">
+            <button onclick="login()">Login</button>
+        </div>
+        <div class="social-login-buttons">
+            <button class="social-login-button kakao" onclick="redirectToSocialLogin('kakao')">Kakao Login</button>
+            <button class="social-login-button google" onclick="redirectToSocialLogin('google')">Google Login</button>
+            <button class="social-login-button naver" onclick="redirectToSocialLogin('naver')">Naver Login</button>
+        </div>
+    </div>
+</div>
+
+<div id="result"></div>
+
+<script>
+    const API_URL = 'http://localhost:8080/auth';
+
+    async function signup() {
+        const userID = document.getElementById('signup-userID').value;
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const phoneNum = document.getElementById('signup-phoneNum').value;
+        const password = document.getElementById('signup-password').value;
+        const passwordConfirm = document.getElementById('signup-password-confirm').value;
+        const userType = document.getElementById('signup-userType').value;
+        const captchaResponse = grecaptcha.getResponse();
+
+        if (password !== passwordConfirm) {
+            document.getElementById('result').innerText = 'Passwords do not match';
+            return;
+        }
+
+        const response = await fetch(`${API_URL}/signup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID, name, email, phoneNum, password, userType, captchaResponse })
+        });
+
+        if (response.ok) {
+            document.getElementById('result').innerText = 'Signup successful. Check your email for verification.';
+        } else {
+            document.getElementById('result').innerText = 'Signup failed: ' + await response.text();
+        }
+    }
+
+    async function login() {
+        const userID = document.getElementById('login-userID').value;
+        const password = document.getElementById('login-password').value;
+        const captchaResponse = grecaptcha.getResponse();
+
+        const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ userID, password, captchaResponse })
+        });
+
+        if (response.ok) {
+            document.getElementById('result').innerText = 'Login successful';
+        } else {
+            document.getElementById('result').innerText = 'Login failed: ' + await response.text();
+        }
+    }
+
+
+    async function redirectToSocialLogin(provider) {
+        let clientId, redirectUri;
+
+        switch(provider) {
+            case 'kakao':
+                clientId = /*[[${kakaoRestApiKey}]]*/ '[[${kakaoRestApiKey}]]';
+                redirectUri = /*[[${kakaoRedirectUri}]]*/ '[[${kakaoRedirectUri}]]';
+                break;
+            case 'google':
+                clientId = /*[[${googleClientId}]]*/ '[[${googleClientId}]]';
+                redirectUri = /*[[${googleRedirectUri}]]*/ '[[${googleRedirectUri}]]';
+                break;
+            case 'naver':
+                clientId = /*[[${naverClientId}]]*/ '[[${naverClientId}]]';
+                redirectUri = /*[[${naverRedirectUri}]]*/ '[[${naverRedirectUri}]]';
+                break;
+            default:
+                return;
+        }
+
+        let loginUrl;
+        switch(provider) {
+            case 'kakao':
+                loginUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
+                break;
+            case 'google':
+                loginUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=email%20profile`;
+                break;
+            case 'naver':
+                loginUrl = `https://nid.naver.com/oauth2.0/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
+                break;
+        }
+
+        window.location.href = loginUrl;
+    }
+</script>
+</body>
+</html>
