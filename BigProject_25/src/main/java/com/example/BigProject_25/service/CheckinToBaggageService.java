@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 @Service
 public class CheckinToBaggageService {
 
-    @Value("http://${flask.server.url}") // application.properties에서 Flask 서버 URL을 가져옴
+    @Value("http://127.0.0.1:5000") // application.properties에서 Flask 서버 URL을 가져옴
     private String flaskServerUrl;
 
     public String getCheckinToBaggageTime() {
