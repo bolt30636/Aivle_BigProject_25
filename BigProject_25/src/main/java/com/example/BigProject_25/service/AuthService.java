@@ -2,6 +2,7 @@ package com.example.BigProject_25.service;
 
 import com.example.BigProject_25.model.User;
 import com.example.BigProject_25.repository.UserRepository;
+import com.example.BigProject_25.repository.VerificationTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -9,16 +10,15 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +29,12 @@ public class AuthService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private VerificationTokenRepository tokenRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -66,8 +72,9 @@ public class AuthService {
     @Value("${naver.redirect-uri}")
     private String naverRedirectUri;
 
-    // 이메일 인증용 토큰 저장소 (실제 구현에서는 Redis나 DB 사용 권장)
-    private Map<String, String> emailVerificationTokens = new HashMap<>();
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 
     public boolean socialLogin(String provider, String token) {
         this.provider = provider;
@@ -261,30 +268,50 @@ public class AuthService {
         }
     }
 
-    public boolean login(String email, String password, String captchaResponse) {
+    public boolean login(String userID, String password, String captchaResponse) {
         boolean isCaptchaValid = true;  // 캡챠 검증을 임시로 통과시키기 위해 true로 설정
         if (!isCaptchaValid) {
             // 캡챠 검증 실패
             return false;
         }
 
-        // 사용자를 인증하고, 성공하면 jwt 토큰을 생성해서 this.token에 저장함
-        User user = userRepository.findByEmail(email);
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            // 로그인 성공, JWT 토큰을 생성할 수 있습니다.
-            this.token = generateJwtToken(user);
-            return true;
+        // 사용자 ID를 기반으로 사용자를 인증하고, 성공하면 jwt 토큰을 생성해서 this.token에 저장함
+        User user = userRepository.findByUserID(userID);
+        if (user != null && !user.isAccountLocked()) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                // 로그인 성공
+                user.setLoginAttempts(0);
+                userRepository.save(user);
+
+                // JWT 토큰 생성
+                this.token = generateJwtToken(user);
+                return true;
+            } else {
+                // 비밀번호 불일치
+                user.setLoginAttempts(user.getLoginAttempts() + 1);
+                if (user.getLoginAttempts() >= 5) {
+                    user.setAccountLocked(true);
+                }
+                userRepository.save(user);
+                return false;
+            }
         }
+
         return false;
     }
 
-    public boolean signup(String name, String email, String userID, int phoneNum, String password, String userType, String captchaResponse) {
+    @Transactional
+    public boolean signup(String name, String email, String userID, String phoneNum, String password, String captchaResponse) {
         boolean isCaptchaValid = true;  // 캡챠 검증을 임시로 통과시키기 위해 true로 설정
         if (!isCaptchaValid) {
             // 캡챠 검증 실패
             return false;
         }
 
+        if (userRepository.findByUserID(userID) != null) {
+            // 이미 해당 userID를 가진 사용자가 존재함
+            return false;
+        }
         if (userRepository.findByEmail(email) != null) {
             // 이미 사용자가 존재함
             return false;
@@ -295,19 +322,18 @@ public class AuthService {
             return false;
         }
 
-        String verificationToken = generateVerificationToken();
-        emailVerificationTokens.put(email, verificationToken);
-        sendVerificationEmail(email, verificationToken);
-
         User user = new User();
         user.setName(name);
         user.setEmail(email);
         user.setUserID(userID);  // userID 설정 추가
         user.setPhoneNum(phoneNum);
         user.setPassword(passwordEncoder.encode(password));
-        user.setUserType(userType);
+        user.setUserType("user");
 
         userRepository.save(user);
+//
+//        String verificationToken = generateVerificationToken(user);
+//        sendVerificationEmail(user, verificationToken);
         return true;
     }
 
@@ -318,24 +344,37 @@ public class AuthService {
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
+//
+//    public String generateVerificationToken(User user) {
+//        String token = UUID.randomUUID().toString();
+//        VerificationToken verificationToken = new VerificationToken(token, user, new Date(System.currentTimeMillis() + 86400000)); // 1일 만료
+//        tokenRepository.save(verificationToken);
+//        return token;
+//    }
+//
+//    public void sendVerificationEmail(User user, String token) {
+//        String recipientAddress = user.getEmail();
+//        String subject = "Registration Confirmation";
+//        String confirmationUrl = "http://localhost:8080/auth/confirm?token=" + token;
+//        String message = "Please confirm your registration by clicking the link below";
+//
+//        SimpleMailMessage email = new SimpleMailMessage();
+//        email.setTo(recipientAddress);
+//        email.setSubject(subject);
+//        email.setText(message + "\r\n" + confirmationUrl);
+//        mailSender.send(email);
+//    }
 
-    private String generateVerificationToken() {
-        // 이메일 인증 토큰 생성 로직
-        return UUID.randomUUID().toString();
-    }
-
-    private void sendVerificationEmail(String email, String token) {
-        // 이메일 전송 로직 구현
-    }
-
-    public boolean verifyEmail(String email, String token) {
-        String storedToken = emailVerificationTokens.get(email);
-        if (storedToken != null && storedToken.equals(token)) {
-            emailVerificationTokens.remove(email);
-            return true;
-        }
-        return false;
-    }
+//    public boolean verifyEmail(String token) {
+//        VerificationToken verificationToken = tokenRepository.findByToken(token);
+//        if (verificationToken == null || verificationToken.getExpiryDate().before(new Date())) {
+//            return false;
+//        }
+//        User user = verificationToken.getUser();
+//        userRepository.save(user);
+//        tokenRepository.delete(verificationToken); // 인증이 완료된 토큰 삭제
+//        return true;
+//    }
 
     public String getNameFromToken() {
         if (this.token == null) {

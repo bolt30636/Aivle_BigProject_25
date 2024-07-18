@@ -14,20 +14,20 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "user_id")
-    private String userID;  // 사용자 아이디 컬럼 추가
+    @Column(name = "user_id", nullable = false, unique = true)
+    private String userID;
 
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "phone_num")
-    private int phoneNum;
+    private String phoneNum;
 
     @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "user_type", nullable = false)
-    private String userType;
+    private String userType = "user";
 
     @Column(name = "password_changed_at")
     private Date passwordChangedAt;
@@ -35,17 +35,25 @@ public class User {
     @Column(name = "is_account_locked")
     private boolean isAccountLocked;
 
-    public User() {
-        // 기본 생성자
-    }
+    @Column(name = "login_attempts", nullable = false)
+    private int loginAttempts = 0;
 
-    public User(String name, String email, String userID, int phoneNum, String password, String userType) {
+//    private String verificationToken;
+//    private boolean emailVerified;
+
+    // 기본 생성자
+    public User() {}
+
+    // 생성자
+    public User(String name, String email, String userID, String phoneNum, String password, String userType) {
         this.name = name;
         this.email = email;
         this.userID = userID;
         this.phoneNum = phoneNum;
         this.password = password;
         this.userType = userType;
+        this.loginAttempts = 0;
+        this.isAccountLocked = false;
     }
 
     // getter 및 setter 메서드
@@ -81,11 +89,11 @@ public class User {
         this.name = name;
     }
 
-    public int getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(int phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 
@@ -121,6 +129,31 @@ public class User {
         isAccountLocked = accountLocked;
     }
 
+    public int getLoginAttempts() {
+        return loginAttempts;
+    }
+
+    public void setLoginAttempts(int loginAttempts) {
+        this.loginAttempts = loginAttempts;
+    }
+
+//
+//    public String getVerificationToken() {
+//        return verificationToken;
+//    }
+//
+//    public void setVerificationToken(String verificationToken) {
+//        this.verificationToken = verificationToken;
+//    }
+//
+//    public boolean isEmailVerified() {
+//        return emailVerified;
+//    }
+//
+//    public void setEmailVerified(boolean emailVerified) {
+//        this.emailVerified = emailVerified;
+//    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -128,11 +161,12 @@ public class User {
                 ", email='" + email + '\'' +
                 ", userID='" + userID + '\'' +
                 ", name='" + name + '\'' +
-                ", phoneNum=" + phoneNum +
+                ", phoneNum='" + phoneNum + '\'' +
                 ", password='" + password + '\'' +
                 ", userType='" + userType + '\'' +
                 ", passwordChangedAt=" + passwordChangedAt +
                 ", isAccountLocked=" + isAccountLocked +
+                ", loginAttempts=" + loginAttempts +
                 '}';
     }
 }
