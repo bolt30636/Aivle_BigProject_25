@@ -17,6 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/auth/**", "/user-management.html", "/static/**", "/css/**", "/js/**", "/images/**","/lost-items/**","/api/**").permitAll()  // 이 경로들에 대한 접근 허용
+                .antMatchers("/ask", "/flight-status", "/parking-fees").permitAll() // /ask, /flight-status, /parking-fees 엔드포인트 접근 허용
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
