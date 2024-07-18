@@ -1,4 +1,4 @@
 package com.example.BigProject_25.controller;
 
-public class WaitingTimePredictionController {
+public class ImageController {
 }
