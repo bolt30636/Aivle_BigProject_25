@@ -53,11 +53,16 @@ dependencies {
 
 	// db연결에 필요한 의존성 추가
 	implementation 'mysql:mysql-connector-java'
+	// api key 보안 위해서 추가
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// email 인증 관련 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
