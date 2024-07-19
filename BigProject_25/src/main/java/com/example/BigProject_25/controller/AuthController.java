@@ -56,7 +56,7 @@ public class AuthController {
         if (authService.signup(name, email, userID, phoneNumStr, password, captchaResponse)) {
             return ResponseEntity.ok("회원가입 요청이 성공적으로 처리되었습니다. 이메일을 확인하세요.");
         } else {
-            return ResponseEntity.status(400).body("회원가입이 실패했습니다. 입력한 정보가 규칙에 맞는지 확인해주세요.");
+            return ResponseEntity.status(400).body("회원가입이 실패했습니다. 입력한 정보가 규칙에 맞는지 다시 한 번 확인해주세요.");
         }
     }
 
