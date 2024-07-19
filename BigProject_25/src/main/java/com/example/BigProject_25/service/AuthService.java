@@ -126,6 +126,7 @@ public class AuthService {
 
             JSONObject kakaoAccount = jsonObj.getJSONObject("kakao_account");
 
+
             User user = new User();
             if (kakaoAccount.has("profile") && kakaoAccount.getJSONObject("profile").has("nickname")) {
                 user.setName(kakaoAccount.getJSONObject("profile").getString("nickname"));
@@ -334,6 +335,14 @@ public class AuthService {
         }
 
         return false;
+    }
+    
+    public String getUserIdByEmailAndName(String email, String name) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && user.getName().equals(name)) {
+            return user.getUserID();
+        }
+        return null;
     }
 
     @Transactional

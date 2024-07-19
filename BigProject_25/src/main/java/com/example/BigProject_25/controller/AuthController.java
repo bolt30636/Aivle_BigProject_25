@@ -42,6 +42,15 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/find-user-id")
+    public ResponseEntity<?> findUserIdByEmailAndName(@RequestParam String email, @RequestParam String name) {
+        String userId = authService.getUserIdByEmailAndName(email, name);
+        if (userId != null) {
+            return ResponseEntity.ok(userId);
+        } else {
+            return ResponseEntity.status(404).body("사용자를 찾을 수 없습니다. 다시 한 번 확인해주세요.");
+        }
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody Map<String, String> payload) {
