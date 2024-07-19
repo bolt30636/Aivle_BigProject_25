@@ -336,7 +336,7 @@ public class AuthService {
 
         return false;
     }
-    
+
     public String getUserIdByEmailAndName(String email, String name) {
         User user = userRepository.findByEmail(email);
         if (user != null && user.getName().equals(name)) {
@@ -387,6 +387,45 @@ public class AuthService {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
+    }
+
+
+    // 비밀번호 재설정 요청 함수
+    public boolean requestPasswordReset(String userID, String name) {
+        User user = userRepository.findByUserID(userID);
+        if (user != null && user.getName().equals(name)) {
+            String tempPassword = generateTemporaryPassword();
+            user.setPassword(passwordEncoder.encode(tempPassword));
+            userRepository.save(user);
+            emailService.sendTemporaryPasswordEmail(user.getEmail(), tempPassword);
+            return true;
+        }
+        return false;
+    }
+
+    // 임시 비밀번호 생성 함수
+    private String generateTemporaryPassword() {
+        // 임시 비밀번호 생성 로직 (10자리 영문, 숫자 조합)
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder tempPassword = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            int randomIndex = (int) (Math.random() * chars.length());
+            tempPassword.append(chars.charAt(randomIndex));
+        }
+        return tempPassword.toString();
+    }
+
+    // 비밀번호 변경 함수
+    public boolean changePassword(String userID, String oldPassword, String newPassword) {
+        User user = userRepository.findByUserID(userID);
+        if (user != null && passwordEncoder.matches(oldPassword, user.getPassword())) {
+            if (isValidPassword(newPassword)) {
+                user.setPassword(passwordEncoder.encode(newPassword));
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
     }
 
     public String generateVerificationToken(User user) {
