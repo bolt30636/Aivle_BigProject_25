@@ -20,11 +20,11 @@ public class HomeController {
     @Value("${google.redirect-uri}")
     private String googleRedirectUri;
 
-    @Value("${naver.client-id}")
-    private String naverClientId;
-
-    @Value("${naver.redirect-uri}")
-    private String naverRedirectUri;
+//    @Value("${naver.client-id}")
+//    private String naverClientId;
+//
+//    @Value("${naver.redirect-uri}")
+//    private String naverRedirectUri;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -32,8 +32,8 @@ public class HomeController {
         model.addAttribute("kakaoRedirectUri", kakaoRedirectUri);
         model.addAttribute("googleClientId", googleClientId);
         model.addAttribute("googleRedirectUri", googleRedirectUri);
-        model.addAttribute("naverClientId", naverClientId);
-        model.addAttribute("naverRedirectUri", naverRedirectUri);
+//        model.addAttribute("naverClientId", naverClientId);
+//        model.addAttribute("naverRedirectUri", naverRedirectUri);
         return "user-management";  // 템플릿 파일명 (user-management.html)
     }
 }
