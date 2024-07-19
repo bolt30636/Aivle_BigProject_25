@@ -102,4 +102,21 @@ public class AuthController {
             return ResponseEntity.status(400).body("유효하지 않거나 만료된 토큰입니다.");
         }
     }
+    @PostMapping("/request-password-reset")
+    public ResponseEntity<?> requestPasswordReset(@RequestParam String userID, @RequestParam String name) {
+        if (authService.requestPasswordReset(userID, name)) {
+            return ResponseEntity.ok("임시 비밀번호가 이메일로 전송되었습니다.");
+        } else {
+            return ResponseEntity.status(404).body("사용자를 찾을 수 없습니다.");
+        }
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestParam String userID, @RequestParam String oldPassword, @RequestParam String newPassword) {
+        if (authService.changePassword(userID, oldPassword, newPassword)) {
+            return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+        } else {
+            return ResponseEntity.status(400).body("비밀번호 변경에 실패했습니다.");
+        }
+    }
 }

@@ -62,11 +62,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	// 재민 의존성 추가 - 중복되는건 나중에 지워야 할듯
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux' // 필요 시 유지
-	compileOnly 'org.projectlombok:lombok'
+
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
