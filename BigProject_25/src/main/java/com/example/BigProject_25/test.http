@@ -1,0 +1,2 @@
+### Detect and Log Taxi Requests
+POST http://localhost:8080/taxi-requests/detect

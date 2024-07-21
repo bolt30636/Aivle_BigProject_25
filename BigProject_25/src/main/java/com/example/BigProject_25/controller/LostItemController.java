@@ -42,6 +42,11 @@ public class LostItemController {
     @PreAuthorize("hasRole('ADMIN')") // 관리자 권한 필요
     public LostItem createLostItem(@RequestPart("file") MultipartFile file,
                                    @RequestPart("lostItem") String lostItemJson) throws IOException {
+        // 파일 개수 확인
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("파일이 필요합니다.");
+        }
+
         // JSON 문자열을 LostItem 객체로 변환
         LostItem lostItem = objectMapper.readValue(lostItemJson, LostItem.class);
         // LostItem 객체와 파일을 저장하고 결과를 반환
@@ -73,6 +78,11 @@ public class LostItemController {
     public LostItem updateLostItem(@PathVariable int id,
                                    @RequestPart("file") MultipartFile file,
                                    @RequestPart("lostItem") String lostItemJson) throws IOException {
+        // 파일 개수 확인
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("파일이 필요합니다.");
+        }
+
         // JSON 문자열을 LostItem 객체로 변환
         LostItem updatedLostItem = objectMapper.readValue(lostItemJson, LostItem.class);
         // 업데이트된 LostItem 객체와 파일을 저장하고 결과를 반환

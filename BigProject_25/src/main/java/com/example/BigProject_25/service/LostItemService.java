@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.client.MultipartBodyBuilder;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,12 +34,15 @@ public class LostItemService {
     private LostItemRepository lostItemRepository; // LostItemRepository를 주입받음
 
     private final RestTemplate restTemplate = new RestTemplate(); // RestTemplate 인스턴스 생성
-    private final String flaskUrl = "http://localhost:6000/api/predict"; // Flask 서버 URL
+    private final String flaskUrl = "http://localhost:5001/api/predict"; // Flask 서버 URL
 
     // 루트 경로 불러오기
     private final String rootPath = System.getProperty("user.dir");
     // 프로젝트 루트 경로에 있는 files 디렉토리 경로 설정
     private final String fileDir = rootPath + "/files/";
+
+    @Value("${app.allowed-extensions}")
+    private String allowedExtensions; // 허용된 파일 확장자
 
     public LostItemService() {
         // 파일 저장 디렉토리 생성
@@ -92,11 +96,26 @@ public class LostItemService {
     // 이미지 파일을 저장하는 메서드
     private String saveImageFile(MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
-        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String filename = UUID.randomUUID().toString() + extension;
+        String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1).toLowerCase();
+        if (!isAllowedExtension(extension)) { // 확장자 확인
+            throw new IOException("File extension not allowed");
+        }
+
+        String filename = UUID.randomUUID().toString() + "." + extension;
         Path filePath = Paths.get(fileDir + filename);
         Files.write(filePath, file.getBytes());
         return filename;
+    }
+
+    // 허용된 파일 확장자 확인 메서드
+    private boolean isAllowedExtension(String extension) {
+        String[] allowedExtensionsArray = allowedExtensions.split(",");
+        for (String allowedExtension : allowedExtensionsArray) {
+            if (allowedExtension.equals(extension)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // 이미지를 분류하는 메서드
