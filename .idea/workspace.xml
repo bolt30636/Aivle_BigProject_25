@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c19a3cc5-9fa7-4b61-9e97-a0d7b8633dcd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/config/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/MultipartFileResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/test.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BigProject_25.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/BigProject_25.BigProject_25.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/com.example.BigProject_25.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/BigProject25Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/BigProject25Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/LostBoardController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/LostItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/LostItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/TaxiRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/TaxiRequestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/LostBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/TaxiRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/TaxiRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/repository/LostBoardRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/BaggageToSecurityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/BaggageToSecurityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/CheckinToBaggageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/CheckinToBaggageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/LostBoardService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/LostItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/LostItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/TaxiRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/TaxiRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2jXwBJRZYLB9hKBv52KYl8m6tC6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.C:/Users/User/Desktop/new_start_temp/BigProject_25/build.gradle.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Desktop/new_start_temp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propCompiler",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c19a3cc5-9fa7-4b61-9e97-a0d7b8633dcd" name="Changes" comment="" />
+      <created>1721546592787</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721546592787</updated>
+      <workItem from="1721546593877" duration="880000" />
+      <workItem from="1721547542935" duration="1095000" />
+      <workItem from="1721548666060" duration="19000" />
+      <workItem from="1721548886470" duration="100000" />
+      <workItem from="1721548998493" duration="53000" />
+      <workItem from="1721549209226" duration="2000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
