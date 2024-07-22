@@ -5,60 +5,101 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c19a3cc5-9fa7-4b61-9e97-a0d7b8633dcd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/MultipartFileResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/test.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/BigProject_25.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/BigProject_25.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/BigProject_25.BigProject_25.main~1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/BigProject_25.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/com.example.BigProject_25.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/config/OAuth2ClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/OAuth2Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BigProject_25/src/main/resources/templates/user-management.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/BigProject_25.BigProject_25.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/com.example.BigProject_25.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/BigProject25Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/BigProject25Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/LostBoardController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/LostItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/LostItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/TaxiRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/controller/TaxiRequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/LostBoard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/TaxiRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/TaxiRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/repository/LostBoardRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/BaggageToSecurityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/BaggageToSecurityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/CheckinToBaggageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/CheckinToBaggageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/LostBoardService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/LostItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/LostItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/TaxiRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/service/TaxiRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/java/com/example/BigProject_25/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BigProject_25/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigProject_25/src/main/resources/static/user-management.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/BigProject_25">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BigProject_25" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;bolt30636&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/bolt30636/Aivle_BigProject_25.git&quot;,
+    &quot;accountId&quot;: &quot;bd991f78-f022-49cd-9d8f-2f3982329f28&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2jXwBJRZYLB9hKBv52KYl8m6tC6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Gradle.BigProject_25 빌드.executor": "Run",
     "Gradle.C:/Users/User/Desktop/new_start_temp/BigProject_25/build.gradle.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.BigProject25Application.executor": "Run",
+    "git-widget-placeholder": "user",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Desktop/new_start_temp",
+    "last_opened_file_path": "C:/Users/User/Desktop/backup/실행안되는 완성본/BigProject_25",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,8 +107,34 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propCompiler",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora_aws"
+    ]
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\backup\실행안되는 완성본\BigProject_25\BigProject_25\src\main\resources\templates" />
+      <recent name="C:\Users\User\Desktop\BigProject_25\BigProject_25\src\main\java\com\example\BigProject_25\model" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BigProject25Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="com.example.BigProject_25.test" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.BigProject_25.BigProject25Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -90,6 +157,9 @@
       <workItem from="1721548886470" duration="100000" />
       <workItem from="1721548998493" duration="53000" />
       <workItem from="1721549209226" duration="2000" />
+      <workItem from="1721554895686" duration="1527000" />
+      <workItem from="1721557683703" duration="5731000" />
+      <workItem from="1721606913812" duration="1822000" />
     </task>
     <servers />
   </component>
@@ -101,7 +171,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="user" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

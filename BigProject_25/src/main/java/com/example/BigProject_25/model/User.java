@@ -11,10 +11,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "user_id", nullable = false, unique = true)
+    @Column(name = "user_id", unique = true)
     private String userID;
 
     @Column(name = "name", nullable = false)
@@ -23,7 +23,7 @@ public class User {
     @Column(name = "phone_num")
     private String phoneNum;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "user_type", nullable = false)
@@ -38,7 +38,7 @@ public class User {
     @Column(name = "login_attempts", nullable = false)
     private int loginAttempts = 0;
 
-    @Column(name = "email_verified", nullable = false)
+    @Column(name = "email_verified")
     private boolean emailVerified = false;
 
     // 기본 생성자
