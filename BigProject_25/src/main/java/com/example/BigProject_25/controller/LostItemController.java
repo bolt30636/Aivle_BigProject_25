@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Log4j2
 @RestController
@@ -112,5 +113,10 @@ public class LostItemController {
         }
         // 파일 리소스와 헤더를 포함하여 200 OK 응답 반환
         return new ResponseEntity<>(resource, header, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public List<LostItem> getAllLostItems() {
+        return lostItemService.findAll();
     }
 }
