@@ -16,21 +16,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                // 특정 경로에 대한 접근 허용 설정
-                .antMatchers("/h2-console/**", "/taxi-requests/**", "/auth/**", "/static/**", "/css/**", "/js/**", "/images/**", "/lost-items/**", "/api/**", "/ask", "/flight-status", "/parking-fees").permitAll()
-                .anyRequest().authenticated()  // 그 외 모든 요청은 인증된 사용자만 접근 가능
+                .antMatchers("/", "/h2-console/**", "/taxi-requests/**", "/auth/**", "/static/**", "/css/**", "/js/**", "/images/**", "/lost-items/**", "/api/**", "/ask", "/flight-status", "/parking-fees", "/oauth2/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
+                .oauth2Login()
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true")
+                .and()
                 .logout()
                 .permitAll()
                 .and()
-                .csrf().disable()  // 필요에 따라 CSRF 보호 비활성화
-                .headers().frameOptions().disable()  // H2 콘솔을 사용하기 위해 프레임 옵션 비활성화
+                .csrf().disable()
+                .headers().frameOptions().disable()
                 .and()
-                .cors();  // CORS 설정 추가
+                .cors();
     }
 
     @Bean
